@@ -1,0 +1,9 @@
+name: letsencrypt
+os: RedHat, CentOS, Ubuntu, Debian
+os_family: RedHat, Debian
+version: 201807
+release: 1
+summary: SaltStack Formula to install and configure certbot to manage Let's Encrypt certificates and renewal.
+description: SaltStack Formula to install and configure certbot to manage Let's Encrypt certificates and renewal.
+top_level_dir: letsencrypt
+recommended: 

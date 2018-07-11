@@ -1,0 +1,14 @@
+{% set letsencrypt = salt.grains.filter_by({
+    'default': {
+        'pkgs': ['letsencrypt'],
+        'service': 'letsencrypt',
+        'conf_file': '/etc/letsencrypt/letsencrypt.conf',
+        'config': {
+            'key': 'value',
+        },
+    },
+    'Debian': {
+    },
+    'RedHat': {
+    },
+}, grain='os_family', merge=salt.pillar.get('letsencrypt:overrides'), base='default') %}

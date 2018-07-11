@@ -1,0 +1,7 @@
+# -*- mode: yaml -*-
+letsencrypt:
+  overrides:
+    pkg: letsencrypt
+    conf_file: /usr/local/etc/letsencrypt/letsencrypt.conf
+  config:
+    key: othervalue
