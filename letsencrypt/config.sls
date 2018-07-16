@@ -4,11 +4,11 @@ include:
   - .install
   - .service
 
-{%- if letsencrypt.get('staging', false) %}
-{%-   set staging = '--staging' %}
-{%- else %}
-{%-   set staging = '' %}
-{%- endif %}
+{% if letsencrypt.get('staging', false) %}
+{% set staging = '--staging' %}
+{% else %}
+{% set staging = '' %}
+{% endif %}
 
 generate_certbot_{{ letsencrypt.CN }}:
   cmd.run:
