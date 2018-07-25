@@ -1,14 +1,18 @@
 {% set letsencrypt = salt.grains.filter_by({
     'default': {
-        'pkgs': ['letsencrypt'],
-        'service': 'letsencrypt',
-        'conf_file': '/etc/letsencrypt/letsencrypt.conf',
-        'config': {
-            'key': 'value',
-        },
+        'webserver': 'nginx',
+        'webroot': '/usr/share/nginx/html/',
+        'service': 'certbot',
+        'email': 'user@example.com',
+        'common_name': 'example.com',
+        'subject_alternative_names': [
+          'test.example.com',
+          ],
     },
     'Debian': {
+      'pkg': 'python-certbot'
     },
     'RedHat': {
+      'pkg': 'python2-certbot'
     },
 }, grain='os_family', merge=salt.pillar.get('letsencrypt:overrides'), base='default') %}
