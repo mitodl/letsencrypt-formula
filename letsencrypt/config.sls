@@ -10,7 +10,7 @@ include:
 {% set staging = '' %}
 {% endif %}
 
-generate_certbot_{{ letsencrypt.CN }}:
+generate_certbot_{{ letsencrypt.common_name }}:
   cmd.run:
     - name: >
         certbot --authenticator webroot -w {{ letsencrypt.webroot }}
