@@ -17,9 +17,11 @@ generate_certbot_{{ letsencrypt.common_name }}:
         --installer {{ letsencrypt.webserver }} {{ staging }}
         --non-interactive --agree-tos --email {{ letsencrypt.email }}
         -d {{ letsencrypt.common_name }} \
+        {% if letsencrypt.subject_alternative_names %}
         {% for subject_alternative_name in letsencrypt.subject_alternative_names %}
         -d {{ subject_alternative_name }} \
         {% endfor %}
+        {% endif %}
         --expand
     - require:
       - pkg: install_certbot
