@@ -10,18 +10,15 @@ include:
 {% set staging = '' %}
 {% endif %}
 
+{% set domains = [letsencrypt.common_name] + letsencrypt.subject_alternative_names %}
+
 generate_certbot_{{ letsencrypt.common_name }}:
   cmd.run:
     - name: >
         certbot --authenticator webroot -w {{ letsencrypt.webroot }}
         --installer {{ letsencrypt.webserver }} {{ staging }}
         --non-interactive --agree-tos --email {{ letsencrypt.email }}
-        -d {{ letsencrypt.common_name }} \
-        {% if letsencrypt.subject_alternative_names %}
-        {% for subject_alternative_name in letsencrypt.subject_alternative_names %}
-        -d {{ subject_alternative_name }} \
-        {% endfor %}
-        {% endif %}
+        -d {{ domains|join(',') }}
         --expand
     - require:
       - pkg: install_certbot
